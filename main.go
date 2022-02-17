@@ -14,7 +14,7 @@ func main() {
 }
 */
 
-package main
+//package main
 
 import (
     "github.com/famousyub/securesocial/api/controller"
@@ -38,7 +38,13 @@ func main() {
     postController := controller.NewPostController(postService) // controller are being set up
     postRoute := routes.NewPostRoute(postController, router) // post routes are initialized
     postRoute.Setup() // post routes are being setup
+    userRepository := repository.NewUserRepository(db)
+    userService := service.NewUserService(userRepository)
+    userController := controller.NewUserController(userService)
+    userRoute := routes.NewUserRoute(userController, router)
+    userRoute.Setup()
 
+    db.DB.AutoMigrate(&models.Post{}, &models.User{})
     db.DB.AutoMigrate(&models.Post{}) // migrating Post model to datbase table
     router.Gin.Run(":8000") //server started on 8000 port
 }

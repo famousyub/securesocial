@@ -1,8 +1,8 @@
 package service
 
 import (
-    "github.com/famousyub/securesocial//api/repository"
-    "github.com/famousyub/securesocial//models"
+    "github.com/famousyub/securesocial/api/repository"
+    "github.com/famousyub/securesocial/models"
 )
 
 //PostService PostService struct

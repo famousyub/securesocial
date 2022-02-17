@@ -119,7 +119,7 @@ func (u *UserController) Login(c *gin.Context) {
     c.JSON(http.StatusOK, response)
 }
 
-func (u *UserController) Login(c *gin.Context) {
+func (u *UserController) Login2(c *gin.Context) {
     var user models.UserLogin
     var hmacSampleSecret []byte
     if err := c.ShouldBindJSON(&user); err != nil {

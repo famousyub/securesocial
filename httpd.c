@@ -1,11 +1,4 @@
-package main
-
-
-
-
-/*
 #include "httpd.h"
-#include<stdio.h>
 
 #include <stdio.h>
 #include <string.h>
@@ -195,68 +188,4 @@ void respond(int n)
     shutdown(clientfd, SHUT_RDWR);         //All further send and recieve operations are DISABLED...
     close(clientfd);
     clients[n]=-1;
-}
-
-
-int main1(int c, char*v)
-{
-    serve_forever(v);
-    return 0;
-}
-
-void route()
-{
-    ROUTE_START()
-
-    ROUTE_GET("/")
-    {
-        printf("HTTP/1.1 200 OK\r\n\r\n");
-        printf("Hello! You are using %s", request_header("User-Agent"));
-    }
-
-    ROUTE_POST("/")
-    {
-        printf("HTTP/1.1 200 OK\r\n\r\n");
-        printf("Wow, seems that you POSTed %d bytes. \r\n", payload_size);
-        printf("Fetch the data using `payload` variable.");
-    }
-
-    ROUTE_END()
-}
-
-*/
-import "C"
-import (
-    "github.com/famousyub/securesocial/api/controller"
-    "github.com/famousyub/securesocial/api/repository"
-    "github.com/famousyub/securesocial/api/routes"
-    "github.com/famousyub/securesocial/api/service"
-    "github.com/famousyub/securesocial/infrastructure"
-    "github.com/famousyub/securesocial/models"
-)
-
-func init() {
-    infrastructure.LoadEnv()
-}
-
-func main() {
-
-    router := infrastructure.NewGinRouter() //router has been initialized and configured
-    db := infrastructure.NewDatabase() // databse has been initialized and configured
-    postRepository := repository.NewPostRepository(db) // repository are being setup
-    postService := service.NewPostService(postRepository) // service are being setup
-    postController := controller.NewPostController(postService) // controller are being set up
-    postRoute := routes.NewPostRoute(postController, router) // post routes are initialized
-    postRoute.Setup() // post routes are being setup
-    userRepository := repository.NewUserRepository(db)
-    userService := service.NewUserService(userRepository)
-    userController := controller.NewUserController(userService)
-    userRoute := routes.NewUserRoute(userController, router)
-    userRoute.Setup()
-
-    db.DB.AutoMigrate(&models.Post{}, &models.User{})
-  //  db.DB.AutoMigrate(&models.Post{}) // migrating Post model to datbase table
-    go router.Gin.Run(":8000") //server started on 8000 port
-
-   C.main1(C.int(20),C.CString("12913"));
 }

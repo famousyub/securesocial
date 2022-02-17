@@ -27,6 +27,6 @@ func (u UserRoute) Setup() {
     user := u.Handler.Gin.Group("/auth")
     {
         user.POST("/register", u.Controller.CreateUser)
-        user.POST("/login", u.Controller.LoginUser)
+        user.POST("/login", u.Controller.Login)
     }
 }

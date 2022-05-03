@@ -1,5 +1,5 @@
 package router
 
-func setRouter(f bool) {
-    return f
+func setRouter(f bool) bool {
+	return f
 }
